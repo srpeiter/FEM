@@ -1,0 +1,63 @@
+#  labexam.msh
+#
+#  mesh file for the example
+#
+#  To run this file use:
+#     sepmesh labexam.msh
+#
+#  Creates the file meshoutput
+#
+#  Define some general constants
+#
+constants           # See Labmanual Section 3.3
+   reals
+    
+      width = 1        # width of the region
+      height = 1       # height of the region
+     
+   integers
+     nelm_hor = 30
+     nelm_vert = 30
+     shape_cur = 1
+     shape_sur = 3
+end
+#
+#  Define the mesh
+#
+mesh2d              # See Labmanual Section 3.4
+#
+#  user points
+#
+   points           # See Labmanual Section 3.4
+      p1=(0,0)
+      p2=(width,0)
+      p3=(width,height)
+      p4=(0,height)
+      p5=(0, height*0.2)
+    
+#
+#  curves
+#
+   curves           # See Labmanual Section 3.4
+      c1 = line shape_cur (p1,p2,nelm=nelm_hor)
+      c2 = line shape_cur (p2,p3,nelm=nelm_vert)
+      c3 = line shape_cur (p3,p4,nelm=nelm_hor)
+      c4 = line shape_cur (p4,p5,nelm=nelm_vert*0.8)
+      c5 = line shape_cur (p5,p1,nelm=nelm_vert*0.2)
+      c6 = curves(c4,c5)
+#
+#  surfaces
+#
+   surfaces         # See Labmanual Section 3.4
+      s1 = triangle shape_sur (c1,c2,c3,c6)
+    
+#
+#  Couple each surface to a different element group in order to provide
+#  different properties to the coefficients
+#
+ 
+
+   plot                           # make a plot of the mesh
+                                  # See Labmanual Section 3.4
+
+end

@@ -1,0 +1,23 @@
+
+rm elemsubr.o
+
+rm sepcompexe
+
+rm sepplot.0001
+
+rm sepplot.0002
+
+rm meshoutput
+
+
+
+
+sepmesh square.msh
+
+compile elemsubr.f90
+
+seplink sepcompexe.f90
+
+sepcompexe <lab4-2.prb
+
+sepview

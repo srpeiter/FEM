@@ -1,0 +1,47 @@
+# labexam.prb
+#
+#  problem file for the example
+#
+#  To run this file use:
+#     sepcomp labexam.prb
+#
+#  Reads the file meshoutput
+#
+#
+#
+#  Define the type of problem to be solved
+#
+problem                   # See Labmanual Section 4.8.1
+
+   types                       # Define types of elements,
+                               # See User Manual Section 3.2.2
+      elgrp1 = (type=1)        # Type number for surface 1
+				# See Standard problems Section 3.1
+     natboundcond
+      
+      bngrp1 = (type=2)        # Type number for surface 2
+   
+     bounelements
+    
+     belm1= curves(c2 to c3)
+     
+     essbouncond                 # Define where essential boundary conditions are
+                               # given (not the value)
+                               # See User Manual Section 3.2.2
+      curves (c1)              # lower boundary
+      curves (c4)              # upper boundary
+      curves (c5)
+end
+#
+#   Define the main structure of the program
+#   See Labmanual Section 4.8.3
+#
+structure
+ #  matrix_structure: symmetric   #  a symmetric profile matrix is used
+   prescribe_boundary_conditions potential = 1, curves(c1,c5)
+   solve_linear_system potential
+   print potential
+   plot_contour potential
+   plot_coloured_levels potential
+end
+end_of_sepran_input
